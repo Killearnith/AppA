@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppA</string>
+    <string name="title_activity_telefono">TelefonoActivity</string>
+    <string name="welcome">"Bienvenido !"</string>
+    <string name="cabeceratelefono"> Escriba un número de telefono para verificar su identidad (Con el código del país y sin espacios):</string>
+    <string name="ntelefonoes"> El  número de telefono seleccionado es:</string>
+    <string name="continuar">Continuar</string>
+    <string name="foto_app">Foto APP</string>
+    <string name="texto_OTP">Introduce la Clave OTP :</string>
+    <string name="clave_OTP">Clave OTP </string>
+    <string name="tel_fono_escribir">Escribe el Teléfono</string>
+</resources>
