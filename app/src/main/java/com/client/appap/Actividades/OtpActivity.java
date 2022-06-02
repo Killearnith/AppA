@@ -147,7 +147,6 @@ public class OtpActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     auth = response.getString("idToken");
-                    Toast.makeText(getApplicationContext(), "Me he auntenticado:",Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

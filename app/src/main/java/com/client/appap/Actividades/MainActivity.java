@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Codigo para generar el hashkey
         //AppSignatureHelper appSignatureHashHelper = new AppSignatureHelper(MainActivity.this);
         //Log.d(TAG, "HashKey: " + appSignatureHashHelper.getAppSignatures().get(0));
-
-
     }
 
     public void onContinuar(View v) {
@@ -66,16 +64,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!(numTel.isEmpty()) &&  (!(numTel.contains(" ")) && (numTel.contains("+")))){
         pBar.setVisibility(View.VISIBLE);
         Intent otpIntent = new Intent(MainActivity.this, OtpActivity.class); //Mover de la Clase A a la B
-        //otpIntent.putExtra("tel", numTel);
         otpIntent.putExtra("datos", datos);
-        Toast.makeText(this, "Num tel es: " + textoMovil.getText().toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Num tel es: " + textoMovil.getText().toString(), Toast.LENGTH_LONG).show();
         //Pasamos el num de Telefono
         startActivity(otpIntent);
     }else Toast.makeText(this, "Es necesario pasar un número de teléfono en el formato correcto", Toast.LENGTH_LONG).show();
         //Código necesario para obtener el codigo hash de la app
-        //AppSignatureHelper appSignatureHelper = new AppSignatureHelper(this);
-        //Log.d(TAG,"El código hash de la app es: "+appSignatureHelper.getAppSignatures().get(0));
-        //Codigo HASH de la app es: nXzGtk7rNLW
     }
 
     @Override
