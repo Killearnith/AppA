@@ -1,4 +1,4 @@
-package com.client.appap.Actividades.Android;
+package com.client.appap.Actividades.Servicios;
 
 import static com.google.android.gms.auth.api.phone.SmsRetriever.SMS_RETRIEVED_ACTION;
 

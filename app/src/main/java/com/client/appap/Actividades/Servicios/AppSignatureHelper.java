@@ -1,4 +1,4 @@
-package com.client.appap.Actividades.Android;
+package com.client.appap.Actividades.Servicios;
 
 import android.content.Context;
 import android.content.ContextWrapper;

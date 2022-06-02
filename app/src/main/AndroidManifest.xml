@@ -36,7 +36,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <receiver
-            android:name="com.client.appap.Actividades.Android.SMSBroadcastReceiver"
+            android:name="com.client.appap.Actividades.Servicios.SMSBroadcastReceiver"
             android:exported="true">
 
             <intent-filter>
