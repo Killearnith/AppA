@@ -49,7 +49,7 @@ public class OtpActivity extends AppCompatActivity {
     private ProgressBar pBar;
     private EditText cOTP;
     private String otpAppM;
-    private String nTel, telAppM;
+    private String nTel, telAppM, urlBD;
     private int clave;
     private FirebaseApp app, secundaria;
     private FirebaseAuth auten, autenMain;
@@ -79,6 +79,8 @@ public class OtpActivity extends AppCompatActivity {
             dat = (Datos) extras.getParcelable("datos");  //Obtenemos el modelo de la actividad anterior
             if(dat!=null) {
                 nTel = dat.getTelefono();
+                urlBD = dat.getUrlDB();
+
             }
             if (nTel != null) {
                 //Creamos el gson para guardar un json en shared preferences
@@ -165,7 +167,12 @@ public class OtpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        String url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
+                        String url;
+                        if(urlBD == null) {
+                             url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
+                        }else {
+                             url = urlBD;
+                        }
                         Log.d("Test", "Aqui llego");
                         // Request a string response from the provided URL.
                         RequestQueue requestQueue = Volley.newRequestQueue(OtpActivity.this);
@@ -184,7 +191,7 @@ public class OtpActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                error.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Error URL no existente o sin permisos", Toast.LENGTH_SHORT).show();
                             }
                         });
                         requestQueue.add(jsonObjectRequest);
@@ -237,10 +244,8 @@ public class OtpActivity extends AppCompatActivity {
                 myRef.child("numeros").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //SystemClock.sleep(1000);
                         RequestQueue queue = Volley.newRequestQueue(OtpActivity.this);
                         Log.d("DataChange", "Dentro del datachange");
-
                         String url2 = "https://appaym-537c4-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth="+authBD2;
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                                 (Request.Method.GET, url2, null, new Response.Listener<JSONObject>() {
@@ -254,22 +259,15 @@ public class OtpActivity extends AppCompatActivity {
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-
                                     }
                                 }, new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         Log.d("OTPError", "error network: "+error.networkResponse);
                                         Log.d("OTPError", "error string: "+error.toString());
-
-
                                     }
                                 });
                         queue.add(jsonObjectRequest);
-
-
-
-
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -331,8 +329,12 @@ public class OtpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        String url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
-                        // Request a string response from the provided URL.
+                        String url;
+                        if(urlBD == null) {
+                            url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
+                        }else {
+                            url = urlBD;
+                        }                        // Request a string response from the provided URL.
                         RequestQueue requestQueue = Volley.newRequestQueue(OtpActivity.this);
                         JSONObject newData = new JSONObject();
                         try {
@@ -354,7 +356,7 @@ public class OtpActivity extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                error.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Error URL no existente o sin permisos", Toast.LENGTH_SHORT).show();
                             }
                         });
                         requestQueue.add(jsonObjectRequest2);

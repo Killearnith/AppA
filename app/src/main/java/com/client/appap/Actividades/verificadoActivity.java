@@ -22,7 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class verificadoActivity extends AppCompatActivity {
-    private String auth, token, authBD2;
+    private String auth, token, authBD2, urlBD;
     private TextView medio;
     private static final String TAG = "verifActivity";
     private Datos dat;
@@ -45,6 +45,7 @@ public class verificadoActivity extends AppCompatActivity {
         if (extras != null) {
             dat = (Datos) extras.getParcelable("datos");        //Obtenemos el modelo de la actividad anterior
             auth = dat.getAuth();
+            urlBD = dat.getUrlDB();
             authBD2 = extras.getString("authBD2");
         }
         //Esperamos 3 segundos
@@ -52,8 +53,12 @@ public class verificadoActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 RequestQueue queue = Volley.newRequestQueue(verificadoActivity.this);
-                String url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth="+auth;
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                String url;
+                if(urlBD == null) {
+                    url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
+                }else {
+                    url = urlBD;
+                }                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                         (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                             @Override

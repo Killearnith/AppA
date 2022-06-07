@@ -1,9 +1,12 @@
 package com.client.appap.Actividades;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "MenuInicial";
     private static final int RESOLVE_HINT = 200;       //Codigo de respuesta correcto para obtener el número de telefono
-    private String numTel;
-    private Button bCont;
+    private String numTel, urlBD;
+    private Button bCont, bnBD;
     private ProgressBar pBar;
     private EditText textoMovil;
     private Datos datos;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Enlazar views
         bCont = (Button) findViewById(R.id.buttonContinuar);
+        bnBD = (Button) findViewById(R.id.buttonNewDB);
         pBar = (ProgressBar) findViewById(R.id.progressBar);
         pBar.setVisibility(View.INVISIBLE);
         textoMovil = (EditText) findViewById(R.id.NumTel);
@@ -58,21 +62,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onContinuar(View v) {
         //Obtener y usar el número de telefono
-        numTel=textoMovil.getText().toString(); //<-- obtenemos el string correspondiente al numbero de telefono seleccionado
+        numTel=textoMovil.getText().toString();
+        //<-- obtenemos el string correspondiente al numbero de telefono seleccionado
         datos.setTelefono(numTel);              //Guardamos el numero de tel en el modelo
         //Comprobamos que el campo pasado no sea nulo o contenga espacios o no contena el +
         if (!(numTel.isEmpty()) &&  (!(numTel.contains(" ")) && (numTel.contains("+")))){
         pBar.setVisibility(View.VISIBLE);
+        Log.d("BD","El valor de la url es: "+datos.getUrlDB());
         Intent otpIntent = new Intent(MainActivity.this, OtpActivity.class); //Mover de la Clase A a la B
         otpIntent.putExtra("datos", datos);
-        //Toast.makeText(this, "Num tel es: " + textoMovil.getText().toString(), Toast.LENGTH_LONG).show();
         //Pasamos el num de Telefono
         startActivity(otpIntent);
     }else Toast.makeText(this, "Es necesario pasar un número de teléfono en el formato correcto", Toast.LENGTH_LONG).show();
-        //Código necesario para obtener el codigo hash de la app
     }
 
     @Override
     public void onClick(View v) { }
+
+    public void onNewDB(View view) {
+        AlertDialog.Builder cst = new AlertDialog.Builder(this);
+        cst.setTitle("Introduce la nueva URL de la Base de Datos (API REST)");
+        final EditText in = new EditText(this);
+        in.setInputType(InputType.TYPE_CLASS_TEXT);
+        cst.setView(in);
+        cst.setPositiveButton("FIN", (dg, w) -> datos.setUrlDB(in.getText().toString()));
+        cst.setNegativeButton("Cancelar", (dg, w) -> dg.cancel());
+        cst.show();
+    }
 
 }

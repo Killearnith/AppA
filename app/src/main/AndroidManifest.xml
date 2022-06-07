@@ -35,14 +35,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <receiver
-            android:name="com.client.appap.Actividades.Servicios.SMSBroadcastReceiver"
-            android:exported="true">
+        <meta-data android:name="firebase_analytics_collection_deactivated" android:value="true" />
 
-            <intent-filter>
-                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
-            </intent-filter>
-        </receiver>
+
     </application>
 
 </manifest>
