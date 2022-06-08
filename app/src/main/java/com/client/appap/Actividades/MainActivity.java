@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final EditText in = new EditText(this);
         in.setInputType(InputType.TYPE_CLASS_TEXT);
         cst.setView(in);
-        cst.setPositiveButton("FIN", (dg, w) -> datos.setUrlDB(in.getText().toString()));
+        cst.setPositiveButton("Continuar", (dg, w) -> datos.setUrlDB(in.getText().toString()));
         cst.setNegativeButton("Cancelar", (dg, w) -> dg.cancel());
         cst.show();
     }

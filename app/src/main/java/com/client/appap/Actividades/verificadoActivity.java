@@ -79,11 +79,14 @@ public class verificadoActivity extends AppCompatActivity {
 
                                 RequestQueue requestDelQueue = Volley.newRequestQueue(verificadoActivity.this);
                                 JSONObject delData = new JSONObject();
-                                String url ="https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth="+auth;
+                                String url;
+                                if(urlBD == null) {
+                                    url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
+                                }else {
+                                    url = urlBD;
+                                }
                                 try {
-
                                     delData.put("token", null);
-                                    //delData.put("otp", null);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

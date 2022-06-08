@@ -174,7 +174,7 @@ public class OtpActivity extends AppCompatActivity {
                              url = urlBD;
                         }
                         Log.d("Test", "Aqui llego");
-                        // Request a string response from the provided URL.
+                        //Codigo correspondiente al envio por API Rest al Servidor para comprobar la clave OTP.
                         RequestQueue requestQueue = Volley.newRequestQueue(OtpActivity.this);
                         JSONObject postData = new JSONObject();
                         try {
@@ -207,7 +207,6 @@ public class OtpActivity extends AppCompatActivity {
         //Comprobamos si recibimos algún otp de la AppA
         //obtenemos la nueva autenticacion de la BD entre AppA y AppM
         String urlBD2 = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBN9-cz5VfCOW24MgQpooQRrsTnhgkbgL8";
-        // Request a string response from the provided URL.
         RequestQueue requestQueueBD2 = Volley.newRequestQueue(OtpActivity.this);
         JSONObject postDataBD2 = new JSONObject();
         try {
@@ -296,7 +295,7 @@ public class OtpActivity extends AppCompatActivity {
             //Obtener token de Auth
             String url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCO0wQa_fia6ojLkFCzLG-sft5XUWF2Skw";
             Log.d("Test", "Aqui llego");
-            // Request a string response from the provided URL.
+            //Codigo correspondiente al envio por API Rest al Servidor para comprobar la clave OTP.
             RequestQueue requestQueue = Volley.newRequestQueue(OtpActivity.this);
             JSONObject postData = new JSONObject();
             try {
@@ -334,7 +333,8 @@ public class OtpActivity extends AppCompatActivity {
                             url = "https://smsretrieverservera-default-rtdb.europe-west1.firebasedatabase.app/numeros.json?auth=" + auth;
                         }else {
                             url = urlBD;
-                        }                        // Request a string response from the provided URL.
+                        }
+                        // Se pide una JSON respuesta de la URL BD.
                         RequestQueue requestQueue = Volley.newRequestQueue(OtpActivity.this);
                         JSONObject newData = new JSONObject();
                         try {
@@ -365,7 +365,6 @@ public class OtpActivity extends AppCompatActivity {
                     }
                 }
             });
-            // Instantiate the RequestQueue.
 
             //Código necesario para obtener el codigo hash de la app
             //AppSignatureHelper appSignatureHelper = new AppSignatureHelper(this);
