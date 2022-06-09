@@ -71,8 +71,6 @@ public class OtpActivity extends AppCompatActivity {
 
 
 
-
-
         //Obtenemos los datos del bundle de la actividad anterior
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

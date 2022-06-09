@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) { }
 
+    //Ref: https://stackoverflow.com/questions/10903754/input-text-dialog-android
     public void onNewDB(View view) {
         AlertDialog.Builder cst = new AlertDialog.Builder(this);
         cst.setTitle("Introduce la nueva URL de la Base de Datos (API REST)");
